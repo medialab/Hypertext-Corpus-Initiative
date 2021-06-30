@@ -76,7 +76,7 @@
           </div>
 
           <!-- EDIT MODE -->
-          <form style="padding: 4px" layout-wrap layout="row" ng-show="!loading && corpusSettingsEditMode">
+          <form name="settings" style="padding: 4px" layout-wrap layout="row" ng-show="!loading && corpusSettingsEditMode">
             
             <!-- Crawling -->
             <div flex="50" flex-xs="100" flex-gt-sm="33" layout="column" style="padding: 4px" >
@@ -197,13 +197,22 @@
                   </md-radio-group>
 
                   <div ng-hide="ed_webarchive_option === ''">
-                  <!-- TODO: DATE SELECTOR -->
                     <dt>Date to try to approach</dt>
-                    <md-input-container style="width: 95%; margin: 0px; height: 28px">
-                      <input ng-model="ed_webarchive_date" ng-change="setArchivesMinMaxDate(ed_webarchive_date, ed_webarchive_daysrange)">
-                    </md-input-container>
+                      <md-datepicker
+                        ng-model="ed_webarchive_date"
+                        ng-change="setArchivesMinMaxDate(ed_webarchive_date, ed_webarchive_daysrange)"
+                        md-min-date="min_allowed_webarchives_date"
+                        md-max-date="max_allowed_webarchives_date"
+                        md-current-view="year"
+                        name="dateField"
+                      ></md-datepicker>
+                      <small class="date_error" ng-messages="settings.dateField.$error">
+                        <div ng-message="valid">The entered value is not a date!</div>
+                        <div ng-message="required">This date is required!</div>
+                        <div ng-message="mindate">Date is too early!</div>
+                        <div ng-message="maxdate">Date is too late!</div>
+                      </small>
 
-                  <!-- TODO: use DATE SELECTOR to define the days range-->
                     <dt>Days to consider around the date</dt>
                     <md-input-container style="width: 95%; margin: 0px; height: 28px">
                       <input type="number" min="1" ng-model="ed_webarchive_daysrange" ng-change="setArchivesMinMaxDate(ed_webarchive_date, ed_webarchive_daysrange)">

@@ -66,13 +66,13 @@ angular.module('hyphe.settingsController', [])
     }
 
     $scope.setArchivesMinMaxDate = function(date, days){
-        try {
-          var dat = new Date(date)
-          dat.setDate(dat.getDate() - days/2)
-          $scope.webarchives_mindate = dat.toISOString().slice(0, 10)
-          dat.setDate(dat.getDate() + days)
-          $scope.webarchives_maxdate = dat.toISOString().slice(0, 10)
-        } catch(e) {}
+      try {
+        var dat = new Date(date)
+        dat.setDate(dat.getDate() - days/2)
+        $scope.webarchives_mindate = dat.toISOString().slice(0, 10)
+        dat.setDate(dat.getDate() + days)
+        $scope.webarchives_maxdate = dat.toISOString().slice(0, 10)
+      } catch(e) {}
     }
 
     $scope.editSettings = function(save){
@@ -109,7 +109,7 @@ angular.module('hyphe.settingsController', [])
             "whitelist_domains": $scope.ed_whitelist
           },
           "webarchives_option": $scope.ed_webarchive_option,
-          "webarchives_date": $scope.ed_webarchive_date,
+          "webarchives_date": $scope.ed_webarchive_date.toISOString().slice(0,10),
           "webarchives_days_range": $scope.ed_webarchive_daysrange,
           "follow_redirects": $scope.ed_follow_redirects,
           "defaultCreationRule": $scope.ed_defaultCreationRule
@@ -141,7 +141,7 @@ angular.module('hyphe.settingsController', [])
       $scope.ed_proxy_port            = $scope.options.proxy.port + 0;
       $scope.ed_webarchive_option     = $scope.options.webarchives_option;
     // TODO VALIDATE DATE AND RANGE
-      $scope.ed_webarchive_date       = $scope.options.webarchives_date;
+      $scope.ed_webarchive_date       = new Date($scope.options.webarchives_date);
       $scope.ed_webarchive_daysrange  = $scope.options.webarchives_days_range + 0;
       $scope.ed_timeout               = $scope.options.phantom.timeout + 0;
       $scope.ed_ajax_timeout          = $scope.options.phantom.ajax_timeout + 0;
@@ -184,6 +184,8 @@ angular.module('hyphe.settingsController', [])
           $scope.setArchivesMinMaxDate($scope.options.webarchives_date, $scope.options.webarchives_days_range)
           $scope.webarchives_options = corpus_status.hyphe.available_archives
           $scope.webarchives_chosen_option = $scope.webarchives_options.filter(function(o) { return o.id === corpus_status.corpus.options.webarchives_option})[0]
+          $scope.min_allowed_webarchives_date = new Date("2010-01-01") // TODO take from backend config
+          $scope.max_allowed_webarchives_date = new Date()
           $scope.loading = false
           $scope.status = {}
 

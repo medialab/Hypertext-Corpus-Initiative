@@ -54,6 +54,17 @@ angular.module('hyphe', [
    $locationProvider.hashPrefix("")
 })
 
+// Date formatting
+.config(function($mdDateLocaleProvider) {
+  $mdDateLocaleProvider.formatDate = function(date) {
+    try {
+      var dt = new Date(date);
+      dt.setHours(12);
+      return dt.toISOString().slice(0,10);
+    } catch(e) {}
+  };
+})
+
 // ngTagsInput
 .config(function(tagsInputConfigProvider) {
   tagsInputConfigProvider.setDefaults('tagsInput', {
@@ -158,3 +169,4 @@ angular.module('hyphe.analytics', [])
   }
 
 }])
+

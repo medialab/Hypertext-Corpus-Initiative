@@ -663,11 +663,15 @@ angular.module('hyphe.preparecrawlsController', [])
       $scope.webentity = webentity
       $scope.depthRange = depthRange
       $scope.cookiesError = ""
+      $scope.webarchives_date = $scope.webentity.webarchives.date + ""
       $scope.webarchives_options = webarchives_options
+      $scope.min_allowed_webarchives_date = new Date("2010-01-01")  // TODO take from backend config
+      $scope.max_allowed_webarchives_date = new Date()
       $scope.setArchivesMinMaxDate = function() {
         if ($scope.webentity.webarchives.option) {
           try {
-            var dat = new Date($scope.webentity.webarchives.date)
+            var dat = new Date($scope.webarchives_date)
+            $scope.webentity.webarchives.date = dat.toISOString().slice(0, 10)
             dat.setDate(dat.getDate() - $scope.webentity.webarchives.days_range/2)
             $scope.webarchives_mindate = dat.toISOString().slice(0, 10)
             dat.setDate(dat.getDate() + $scope.webentity.webarchives.days_range)

@@ -1,5 +1,5 @@
 <md-dialog aria-label="Mango (Fruit)">
-  <form>
+  <form name="settings">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>{{webentity.name}}</h2>
@@ -204,13 +204,22 @@
                   </div>
                 </md-radio-group>
                 <div layout="column" ng-style="{'opacity': webentity.webarchives.option ? 1 : 0}">
-                  <!-- TODO: DATE SELECTOR -->
                   <label><small>Date to try to approach:</small></label>
-                  <md-input-container style="width: 95%; margin: 0px; height: 28px">
-                    <input ng-model="webentity.webarchives.date" ng-change="setArchivesMinMaxDate()">
-                  </md-input-container>
+                  <md-datepicker
+                    ng-model="webarchives_date"
+                    ng-change="setArchivesMinMaxDate()"
+                    md-min-date="min_allowed_webarchives_date"
+                    md-max-date="max_allowed_webarchives_date"
+                    md-current-view="year"
+                    name="dateField"
+                  ></md-datepicker>
+                  <small class="date_error" ng-messages="settings.dateField.$error">
+                    <div ng-message="valid">The entered value is not a date!</div>
+                    <div ng-message="required">This date is required!</div>
+                    <div ng-message="mindate">Date is too early!</div>
+                    <div ng-message="maxdate">Date is too late!</div>
+                  </small>
 
-                  <!-- TODO: use DATE SELECTOR to define the days range-->
                   <label><small>Days to consider around the date:</small></label>
                   <md-input-container style="width: 95%; margin: 0px; height: 28px">
                     <input type="number" min="1" ng-model="webentity.webarchives.days_range" ng-change="setArchivesMinMaxDate()">

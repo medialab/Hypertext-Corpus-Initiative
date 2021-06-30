@@ -66,6 +66,20 @@ a {
   margin: 0;
 }
 
+.md-default-theme .md-calendar-day-header, .md-calendar-day-header {
+  background: rgb(224,224,224);
+  color: rgba(0,0,0,0.87);
+}
+
+.md-calendar.md-default-theme, .md-calendar {
+  background: rgb(255,255,255);
+  color: rgba(0,0,0,0.87);
+}
+
+.date_error {
+  color: rgb(221,44,0);
+}
+
 .pointable-grid-tile {
   cursor: pointer;
   opacity: 1.0;
