@@ -35,7 +35,7 @@ angular.module('hyphe', [
   $routeProvider.when('/project/:corpusId/monitorCrawls', {templateUrl: 'views/monitorCrawls.html', controller: 'monitorCrawls'});
   $routeProvider.when('/project/:corpusId/listWebentities', {templateUrl: 'views/listWebentities.html', controller: 'listWebentities'});
   $routeProvider.when('/project/:corpusId/export', {templateUrl: 'views/export.html', controller: 'export'});
-  $routeProvider.when('/project/:corpusId/settings', {templateUrl: 'views/settings.html', controller: 'settings'});
+  $routeProvider.when('/project/:corpusId/settings', {templateUrl: 'views/settings.html', controller: 'settings as ctrl'});
   $routeProvider.when('/project/:corpusId/help', {templateUrl: 'views/help.html', controller: 'help'});
   $routeProvider.when('/project/:corpusId/help/entry/:entry', {templateUrl: 'views/help.html', controller: 'help'});
   $routeProvider.when('/project/:corpusId/manageTags', {templateUrl: 'views/manageTags.html', controller: 'manageTags', reloadOnSearch: false});
@@ -55,7 +55,7 @@ angular.module('hyphe', [
 })
 
 // Date formatting
-.config(function($mdDateLocaleProvider) {
+/*.config(function($mdDateLocaleProvider) {
   $mdDateLocaleProvider.formatDate = function(date) {
     try {
       var dt = new Date(date);
@@ -63,7 +63,7 @@ angular.module('hyphe', [
       return dt.toISOString().slice(0,10);
     } catch(e) {}
   };
-})
+})*/
 
 // ngTagsInput
 .config(function(tagsInputConfigProvider) {
