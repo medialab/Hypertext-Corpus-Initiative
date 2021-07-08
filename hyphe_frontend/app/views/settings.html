@@ -10,21 +10,10 @@
         <!-- Content (except destroy and reset) -->
           <md-content style="padding: 8px" md-colors="{'background': 'default-background-100'}" flex="grow">
             <form name="editsettings" style="padding: 4px" layout-wrap layout="row">
-                      <dt>Date to try to approach {{ ctrl.date }}</dt>
+                      <dt>Date to try to approach {{ ctrl.datesuper }}</dt>
                       <md-datepicker
-                        ng-model="ctrl.date"
-                        ng-change="ctrl.setArchivesMinMaxDate('TEST')"
-                        md-min-date="ctrl.mindate"
-                        md-max-date="ctrl.maxdate"
-                        md-current-view="year"
-                        name="dateField"
+                        ng-model="ctrl.datesuper"
                       ></md-datepicker>
-                      <small class="date_error" ng-messages="editsettings.dateField.$error">
-                        <div ng-message="valid">The entered value is not a date!</div>
-                        <div ng-message="required">This date is required!</div>
-                        <div ng-message="mindate">Date is too early!</div>
-                        <div ng-message="maxdate">Date is too late!</div>
-                      </small>
 
             </form>
           </md-content>

@@ -1,14 +1,11 @@
+angular.module('hyphe.settingsController', ['ngMaterial', 'ngMessages'])
 
-angular.module('hyphe.settingsController', [])
-
-  .controller('settings', [
-  function() {
-    var ctrl = this
-    ctrl.loading = false
-    ctrl.date = new Date()
-    ctrl.mindate = new Date("2015-01-01")
-    ctrl.maxdate = new Date("2023-01-01")
-    ctrl.setArchivesMinMaxDate = function(val) {
-        console.log(val, ctrl)
-    }
+  .controller('settings', ['$scope', 
+  function($scope) {
+    var ctrl = this;
+    ctrl.datesuper = new Date();
+    $scope.datesuper = ctrl.datesuper
+    $scope.$watch("datesuper", function(oldval, newval) { 
+      console.log("watch", oldval, newval, ctrl.datesuper)
+    })
   }])
